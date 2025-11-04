@@ -34,7 +34,7 @@ def cmd_hash_object(args):
     print("hash-object: not implemented")
 
 def cmd_init(args):
-    print("init: not implemented")
+    repo_create(args.path)
 
 def cmd_log(args):
     print("log: not implemented")
@@ -164,6 +164,12 @@ def repo_create(path):
 
 def main(argv=sys.argv[1:]):
     args = argparser.parse_args(argv)
+    argsp = argsubparsers.add_parser("init", help="Initialize a new, empty repository.")
+    argsp.add_argument("path",
+                   metavar="directory",
+                   nargs="?",
+                   default=".",
+                   help="Where to create the repository.")
     match args.command:
         case "add"          : cmd_add(args)
         case "cat-file"     : cmd_cat_file(args)
